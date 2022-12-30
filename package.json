@@ -4,7 +4,9 @@
   "description": "Reference: https://www.freecodecamp.org/news/how-to-enable-es6-and-beyond-syntax-with-node-and-express-68d3e11fe1ab/",
   "private": true,
   "babel": {
-    "presets": ["@babel/preset-env"]
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,7 +15,8 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.20",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "twig": "^1.15.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
@@ -22,8 +25,15 @@
   },
   "nodemonConfig": {
     "exec": "npm run dev",
-    "watch": ["server/*", "public/*"],
-    "ignore": ["**/__tests__/**", "*.test.js", "*.spec.js"]
+    "watch": [
+      "server/*",
+      "public/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
   },
   "scripts": {
     "start": "npm run prod",

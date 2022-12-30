@@ -1,10 +1,15 @@
 import express from 'express';
+import Twig from 'twig';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 var app = express();
+
+app.set('views', './server/views');
+app.set('view engine', 'twig');
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
