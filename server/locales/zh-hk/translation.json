@@ -1,5 +1,7 @@
 {
-    "home": {
-        "welcome_to": "歡迎來到"
-    }
+	"home": {
+        "Chinese": "繁",
+		"English": "EN",
+		"Welcome to %s": "歡迎來到 {{title}}"
+	}
 }

@@ -2,8 +2,12 @@
 
 {% block body %}
   <h1>{{title}}</h1>
-  <p>{{ t("home.welcome_to") }}{{title}}</p>
+  <p>{{ t("home.Welcome to %s", {title: title}) }}</p>
+--  {{ language }}--
   <hr />
-  <a href="?lng=en">EN</a>
-  <a href="?lng=zh-hk">HK</a>
+  {% if (language == 'en') %}
+  <span>{{ t("home.English") }}</span> | <a href="/zh-hk">{{ t("home.Chinese") }}</a>
+  {% else %}
+  <a href="/en">{{ t("home.English") }}</a> | <span>{{ t("home.Chinese") }}</span>
+  {% endif %}
 {% endblock %}

@@ -22,8 +22,10 @@ i18next
   },
   debug: false,
   detection: {
-    order: ['path', 'querystring', 'cookie'],
-    caches: ['cookie']  // we may not need this line
+    order: ['path'],
+    lookupPath: 'lng',
+    lookupFromPathIndex: 0,
+    caches: false
   },
   fallbackLng: 'en',
   preload: ['en', 'zh-hk']
@@ -39,6 +41,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/', indexRouter);
+app.use('/en/', indexRouter);
+app.use('/zh-hk/', indexRouter);
 app.use('/users', usersRouter);
 app.use((req, res, next) => {
     next(createError(404));
