@@ -29,6 +29,7 @@ i18next
   preload: ['en', 'zh-hk']
 });
 app.use(i18nextMiddleware.handle(i18next));
+Twig.cache(app.get('env') === 'production');
 app.set('views', './server/views');
 app.set('view engine', 'twig');
 
