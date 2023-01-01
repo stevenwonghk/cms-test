@@ -24,7 +24,8 @@
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.7",
-    "@babel/preset-env": "^7.20.2"
+    "@babel/preset-env": "^7.20.2",
+    "dotenv": "^16.0.3"
   },
   "nodemonConfig": {
     "exec": "npm run dev",
@@ -42,7 +43,8 @@
     "start": "npm run prod",
     "build": "npm-run-all clean transpile",
     "server": "node ./dist-server/bin/www",
-    "dev": "NODE_ENV=development npm-run-all build server",
+    "server:dev": "node -r dotenv/config ./dist-server/bin/www",
+    "dev": "NODE_ENV=development npm-run-all build server:dev",
     "prod": "NODE_ENV=production npm-run-all build server",
     "transpile": "babel ./server --out-dir dist-server --source-maps",
     "watch:dev": "nodemon",
