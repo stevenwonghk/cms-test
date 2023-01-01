@@ -1,45 +1,21 @@
 import createError from 'http-errors';
 import express from 'express';
-import Twig from 'twig';
-import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 
-import i18next from 'i18next';
-import i18nextMiddleware from 'i18next-http-middleware';
-import Backend from 'i18next-fs-backend';
+import { setupI18n, setupTwig } from './services/bootstrap';
 
 var app = express();
-
-i18next
-.use(Backend)
-.use(i18nextMiddleware.LanguageDetector)
-.init({
-  backend: {
-    loadPath: './server/locales/{{lng}}/{{ns}}.json',
-  },
-  debug: false,
-  detection: {
-    order: ['path'],
-    lookupPath: 'lng',
-    lookupFromPathIndex: 0,
-    caches: false
-  },
-  fallbackLng: 'en',
-  preload: ['en', 'zh-hk']
-});
-app.use(i18nextMiddleware.handle(i18next));
-Twig.cache(app.get('env') === 'production');
-app.set('views', './server/views');
-app.set('view engine', 'twig');
+setupI18n(app);
+setupTwig(app);
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static('./public'));
 app.use('/', indexRouter);
 app.use('/en/', indexRouter);
 app.use('/zh-hk/', indexRouter);

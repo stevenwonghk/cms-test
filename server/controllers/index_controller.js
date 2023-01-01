@@ -8,6 +8,8 @@ class IndexController {
    static list(req, res, next) {
     console.log('IndexController.list');
     console.log(i18next.resolvedLanguage);
+    console.log(req.language);
+    console.log(req.languages);
     res.render('index', { title: 'Github'});
   }
 }

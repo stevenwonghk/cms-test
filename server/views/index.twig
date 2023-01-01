@@ -4,6 +4,8 @@
   <h1>{{title}}</h1>
   <p>{{ t("home.Welcome to %s", {title: title}) }}</p>
 --  {{ language }}--
+<br>
+--  {{ i18next.resolvedLanguage }}--
   <hr />
   {% if (language == 'en') %}
   <span>{{ t("home.English") }}</span> | <a href="/zh-hk">{{ t("home.Chinese") }}</a>
