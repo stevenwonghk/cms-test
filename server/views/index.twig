@@ -2,6 +2,8 @@
 
 {% block body %}
   <h1>{{title}}</h1>
-  <p>Welcome to {{title}}</p>
-  ---
+  <p>{{ t("home.welcome_to") }}{{title}}</p>
+  <hr />
+  <a href="?lng=en">EN</a>
+  <a href="?lng=zh-hk">HK</a>
 {% endblock %}

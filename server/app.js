@@ -6,8 +6,29 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
+
+import i18next from 'i18next';
+import i18nextMiddleware from 'i18next-http-middleware';
+import Backend from 'i18next-fs-backend';
+
 var app = express();
 
+i18next
+.use(Backend)
+.use(i18nextMiddleware.LanguageDetector)
+.init({
+  backend: {
+    loadPath: './server/locales/{{lng}}/{{ns}}.json',
+  },
+  debug: false,
+  detection: {
+    order: ['path', 'querystring', 'cookie'],
+    caches: ['cookie']  // we may not need this line
+  },
+  fallbackLng: 'en',
+  preload: ['en', 'zh-hk']
+});
+app.use(i18nextMiddleware.handle(i18next));
 app.set('views', './server/views');
 app.set('view engine', 'twig');
 
