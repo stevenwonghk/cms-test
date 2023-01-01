@@ -1,0 +1,5 @@
+  {% if (language == 'en') %}
+  <span>{{ t("home.English") }}</span> | <a href="/zh-hk">{{ t("home.Chinese") }}</a>
+  {% else %}
+  <a href="/en">{{ t("home.English") }}</a> | <span>{{ t("home.Chinese") }}</span>
+  {% endif %}

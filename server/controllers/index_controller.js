@@ -6,11 +6,11 @@ const i18next = require('i18next');
 
 class IndexController {
    static list(req, res, next) {
-    console.log('IndexController.list');
-    console.log(i18next.resolvedLanguage);
-    console.log(req.language);
-    console.log(req.languages);
-    res.render('index', { title: 'Github'});
+    const data = {
+        req: req,
+        title: 'Github'
+    };
+    res.render('index', data);
   }
 }
 

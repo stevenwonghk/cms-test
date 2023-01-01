@@ -11,15 +11,23 @@ var app = express();
 setupI18n(app);
 setupTwig(app);
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static('./public'));
-app.use('/', indexRouter);
-app.use('/en/', indexRouter);
-app.use('/zh-hk/', indexRouter);
-app.use('/users', usersRouter);
+app.use([
+    logger('dev'),
+    express.json(),
+    express.urlencoded({ extended: false }),
+    cookieParser(),
+    express.static('./public')
+]);
+app.use('/:preview(preview)?/:lang(en|tc)?', function(req, res, next) {
+    req.preview = req.params.preview === 'preview';
+    req.lang = req.params.lang ?? (process.env.DEFAULT_LANGUAGE ?? 'en');
+    const map = {
+        'en': 'en',
+        'tc': 'zh-HK'
+    }
+    req.i18n.changeLanguage(map[req.lang]);
+    indexRouter(req, res, next);
+});
 app.use((req, res, next) => {
     next(createError(404));
 });

@@ -4,12 +4,24 @@
   <h1>{{title}}</h1>
   <p>{{ t("home.Welcome to %s", {title: title}) }}</p>
 --  {{ language }}--
-<br>
---  {{ i18next.resolvedLanguage }}--
+<table>
+    <tr>
+        <td>{{ t("Preview Mode") }}</td>
+        <td>{{ req.preview | default(false) }}</td>
+    </tr>
+    <tr>
+        <td>{{ t("Language") }}</td>
+        <td>{{ req.lang }}</td>
+    </tr>
+    <tr>
+        <td>{{ t("Normalized URL") }}</td>
+        <td>{{ req.url }}</td>
+    </tr>
+    <tr>
+        <td>{{ t("Original URL")}}</td>
+        <td>{{ req.originalUrl }}</td>
+    </tr>
+</table>
   <hr />
-  {% if (language == 'en') %}
-  <span>{{ t("home.English") }}</span> | <a href="/zh-hk">{{ t("home.Chinese") }}</a>
-  {% else %}
-  <a href="/en">{{ t("home.English") }}</a> | <span>{{ t("home.Chinese") }}</span>
-  {% endif %}
+  {% include 'elements/lang-switcher.twig' %}
 {% endblock %}

@@ -6,26 +6,24 @@ import Twig from 'twig';
 export function setupI18n(app) {
     i18next
         .use(Backend)
-        .use(i18nextMiddleware.LanguageDetector)
         .init({
             backend: {
                 loadPath: './server/locales/{{lng}}/{{ns}}.json',
             },
-            debug: false,
-            detection: {
-                order: ['header', 'path'],
-                lookupPath: 'lng',
-                lookupFromPathIndex: 0,
-                caches: false
-            },
+            debug: process.env.I18NEXT_DEBUG || false,
             fallbackLng: 'en',
-            preload: ['en', 'zh-hk']
+            preload: ['en', 'zh-HK']
         });
     app.use(i18nextMiddleware.handle(i18next));
 }
 
 export function setupTwig(app) {
     Twig.cache(app.get('env') === 'production');
-    app.set('views', './server/views');
-    app.set('view engine', 'twig');
+    const settings = {
+        'views': './server/views',
+        'view engine': 'twig'
+    };
+    Object.keys(settings).forEach((key) => {
+        app.set(key, settings[key]);
+    });
 }
