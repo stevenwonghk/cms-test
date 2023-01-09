@@ -3,7 +3,6 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index';
-import usersRouter from './routes/users';
 
 import { setupI18n, setupTwig } from './services/bootstrap';
 
@@ -18,7 +17,7 @@ app.use([
     cookieParser(),
     express.static('./public')
 ]);
-app.use('/:preview(preview)?/:lang(en|tc)?', function(req, res, next) {
+app.use('/:preview(preview)?/:lang(en|tc)?', function (req, res, next) {
     req.preview = req.params.preview === 'preview';
     req.lang = req.params.lang ?? (process.env.DEFAULT_LANGUAGE ?? 'en');
     const map = {
@@ -32,7 +31,7 @@ app.use((req, res, next) => {
     next(createError(404));
 });
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
